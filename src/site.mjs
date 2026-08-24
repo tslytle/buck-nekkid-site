@@ -39,8 +39,14 @@ export const site = {
 // Web3Forms access key. Swap this one value to change where every lead lands.
 // Get a key at https://web3forms.com — you enter the destination inbox and they
 // email you the key. Overridable at build time with WEB3FORMS_KEY.
+//
+// Not a secret: this key ships inside the public HTML of every form, so anyone
+// can read it with view-source. It identifies the destination inbox, it does not
+// authorise anything. The honeypot below and Web3Forms' own spam filter are what
+// keep the inbox clean. Currently delivering to justinldecesare@gmail.com —
+// request a new key for igetbucknekkid@gmail.com when testing is done.
 export const FORM_ACCESS_KEY =
-  process.env.WEB3FORMS_KEY || 'REPLACE_WITH_WEB3FORMS_ACCESS_KEY';
+  process.env.WEB3FORMS_KEY || '51452120-20c2-4854-87aa-4efdba9379bc';
 
 // Canonical origin. Update once a real domain is attached in Cloudflare Pages.
 export const ORIGIN = process.env.SITE_ORIGIN || 'https://buck-nekkid.pages.dev';
