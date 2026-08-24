@@ -3,8 +3,6 @@
 (function () {
   'use strict';
 
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   /* ---------- Mobile nav ---------- */
 
   var toggle = document.querySelector('.nav-toggle');
@@ -54,8 +52,12 @@
       });
     };
 
+    // Autoplay runs regardless of prefers-reduced-motion: the rotation is a
+    // requirement of the page, not decoration. Reduced motion is honoured in
+    // CSS instead, where .hero__track drops its transition — so those visitors
+    // get the same 3s rotation as a clean cut with no sliding movement.
     var start = function () {
-      if (reduceMotion || count < 2) return;
+      if (count < 2) return;
       stop();
       timer = setInterval(function () {
         show(index + 1);

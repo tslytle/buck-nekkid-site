@@ -4,10 +4,15 @@
 
 import { cp, mkdir, rm, writeFile, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 
 import { products, FORM_ACCESS_KEY, ORIGIN } from '../src/site.mjs';
+import { setAssets } from '../src/assets.mjs';
 import { homePage, productPage, thanksPage, notFoundPage } from '../src/pages.mjs';
+
+const fingerprint = (contents) =>
+  createHash('sha256').update(contents).digest('hex').slice(0, 8);
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -40,18 +45,25 @@ async function main() {
 
   const written = [];
 
-  // Pages
+  // Fingerprint the CSS and JS first — the pages need their hashed names, and
+  // the hash is what lets these be cached immutably without hiding a deploy.
+  const css = await readFile(path.join(root, 'src/styles.css'), 'utf8');
+  const js = await readFile(path.join(root, 'src/main.js'), 'utf8');
+  const cssName = `styles.${fingerprint(css)}.css`;
+  const jsName = `main.${fingerprint(js)}.js`;
+  setAssets({ css: `/${cssName}`, js: `/${jsName}` });
+
+  written.push(await write(cssName, css));
+  written.push(await write(jsName, js));
+  written.push(await write('favicon.svg', favicon));
+
+  // Pages (rendered after setAssets so they reference the hashed filenames)
   written.push(await write('index.html', homePage()));
   for (const p of products) {
     written.push(await write(`${p.slug}.html`, productPage(p)));
   }
   written.push(await write('thanks.html', thanksPage()));
   written.push(await write('404.html', notFoundPage()));
-
-  // Assets that live in src/ and ship as-is
-  written.push(await write('styles.css', await readFile(path.join(root, 'src/styles.css'), 'utf8')));
-  written.push(await write('main.js', await readFile(path.join(root, 'src/main.js'), 'utf8')));
-  written.push(await write('favicon.svg', favicon));
 
   // SEO
   written.push(
@@ -67,11 +79,32 @@ async function main() {
     await write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${ORIGIN}/sitemap.xml\n`)
   );
 
-  // Cloudflare Pages: long-cache the fingerprint-free assets we control.
+  // Cache policy. The CSS and JS carry a content hash in their filename, so
+  // they can be cached forever — a change produces a new URL. Everything
+  // unfingerprinted (HTML, images) must revalidate, otherwise a deploy stays
+  // invisible to anyone who already has the old copy.
   written.push(
     await write(
       '_headers',
-      `/images/*\n  Cache-Control: public, max-age=604800, stale-while-revalidate=86400\n\n/*.css\n  Cache-Control: public, max-age=3600\n\n/*.js\n  Cache-Control: public, max-age=3600\n\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: SAMEORIGIN\n`
+      [
+        '/styles.*.css',
+        '  Cache-Control: public, max-age=31536000, immutable',
+        '',
+        '/main.*.js',
+        '  Cache-Control: public, max-age=31536000, immutable',
+        '',
+        '/images/*',
+        '  Cache-Control: public, max-age=3600, stale-while-revalidate=86400',
+        '',
+        '/*.html',
+        '  Cache-Control: public, max-age=0, must-revalidate',
+        '',
+        '/*',
+        '  X-Content-Type-Options: nosniff',
+        '  Referrer-Policy: strict-origin-when-cross-origin',
+        '  X-Frame-Options: SAMEORIGIN',
+        '',
+      ].join('\n')
     )
   );
 

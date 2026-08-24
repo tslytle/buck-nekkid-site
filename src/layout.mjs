@@ -2,6 +2,7 @@
 // Every page is assembled from these so header/footer changes happen once.
 
 import { site, products, FORM_ACCESS_KEY, ORIGIN, projectTypes, timelines } from './site.mjs';
+import { assets } from './assets.mjs';
 
 /** Escape text for interpolation into HTML markup. */
 export const esc = (s) =>
@@ -77,7 +78,7 @@ ${noindex ? '<meta name="robots" content="noindex">\n' : ''}<link rel="canonical
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS}">
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="${assets.css}">
 <script type="application/ld+json">${localBusinessJsonLd()}</script>
 </head>
 <body>
@@ -162,7 +163,7 @@ ${products
     <div class="footer__copy">&copy; ${new Date().getFullYear()} ${esc(site.name)}. ${esc(site.city)}, Kentucky. All rights reserved.</div>
   </div>
 </footer>
-<script src="/main.js" defer></script>
+<script src="${assets.js}" defer></script>
 </body>
 </html>`;
 }
