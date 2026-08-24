@@ -83,6 +83,11 @@ Connected to Git, so every push to `main` publishes.
 | Build output directory | `dist` |
 | Environment variable | `WEB3FORMS_KEY` (optional; overrides the value in `src/site.mjs`) |
 
+The Node version is pinned to 22 by `.node-version`. `sharp` — the only
+dependency, used solely by `npm run images` — requires Node 20.9 or newer, and
+Cloudflare's default is not always recent enough. The build itself uses nothing
+but Node built-ins, so it cannot fail on a dependency.
+
 Once a real domain is attached, set `SITE_ORIGIN` (or edit `ORIGIN` in
 `src/site.mjs`) so canonical URLs, Open Graph tags, and `sitemap.xml` point at
 the live hostname instead of the `.pages.dev` subdomain.
