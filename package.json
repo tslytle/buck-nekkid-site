@@ -1,0 +1,16 @@
+{
+  "name": "buck-nekkid-outdoor-living",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketing site for Buck Nekkid Outdoor Living, Scottsville KY",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "dev": "node tools/build.mjs && node tools/serve.mjs",
+    "images": "node tools/optimize-images.mjs",
+    "audit": "node tools/audit.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}
