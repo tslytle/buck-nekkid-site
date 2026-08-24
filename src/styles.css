@@ -350,7 +350,9 @@ h2 {
   width: 100%;
   height: 100%;
   will-change: transform;
-  transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
+  /* Paired with the 3s autoplay in main.js: long enough to read as a glide,
+     short enough that each slide still holds still for most of its turn. */
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .hero__slide {
@@ -371,11 +373,18 @@ h2 {
   background: linear-gradient(180deg, rgba(8, 29, 58, 0.72), rgba(8, 29, 58, 0.55));
 }
 
-.hero__content {
+/* Outer column matches the header's 1140px container, so the hero copy starts
+   on the same left edge as the logo and nav rather than floating mid-screen. */
+.hero__body {
   position: relative;
   z-index: 2;
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.hero__content {
   max-width: 680px;
-  padding: 60px var(--pad);
 }
 
 .hero__kicker {

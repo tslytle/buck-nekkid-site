@@ -93,7 +93,9 @@ export function header({ current, onHome = false }) {
   const contactHref = onHome ? '#contact' : '#quote';
   const links = [
     { href: `${home}#divisions`, label: 'Divisions' },
-    { href: `${home}#products`, label: 'Products' },
+    // The standalone "Products & Brands" section was removed as redundant, so
+    // this points at the divisions grid too — that grid is the product listing.
+    { href: `${home}#divisions`, label: 'Products' },
     { href: `${home}#about`, label: 'About' },
     { href: `${home}#visit`, label: 'Visit' },
     { href: contactHref, label: 'Contact' },

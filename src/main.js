@@ -44,7 +44,7 @@
     var count = track ? track.children.length : 0;
     var index = 0;
     var timer = null;
-    var AUTOPLAY_MS = 6000;
+    var AUTOPLAY_MS = 3000;
 
     var show = function (i) {
       index = (i + count) % count;

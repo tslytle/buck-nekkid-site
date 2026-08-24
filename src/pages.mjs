@@ -82,14 +82,16 @@ ${slides}
     </div>
   </div>
   <div class="hero__overlay"></div>
-  <div class="wrap hero__content">
-    <span class="eyebrow eyebrow--on-dark">${esc(site.city)}, Kentucky</span>
-    <div class="hero__kicker">${esc(site.subTagline)}</div>
-    <h1 class="hero__title">${esc(site.tagline)}</h1>
-    <p class="hero__lead">We build backyard oases &mdash; custom pools, hot tubs, outdoor kitchens, and everything in between. Luxury design and honest, hometown service in every yard we touch.</p>
-    <div class="btn-row">
-      <a class="btn btn--primary" href="#products">Explore Our Products</a>
-      <a class="btn btn--outline-light" href="#contact">Get a Free Consultation</a>
+  <div class="wrap hero__body">
+    <div class="hero__content">
+      <span class="eyebrow eyebrow--on-dark">${esc(site.city)}, Kentucky</span>
+      <div class="hero__kicker">${esc(site.subTagline)}</div>
+      <h1 class="hero__title">${esc(site.tagline)}</h1>
+      <p class="hero__lead">We build backyard oases &mdash; custom pools, hot tubs, outdoor kitchens, and everything in between. Luxury design and honest, hometown service in every yard we touch.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="#divisions">Explore Our Products</a>
+        <a class="btn btn--outline-light" href="#contact">Get a Free Consultation</a>
+      </div>
     </div>
   </div>
   <div class="hero__dots" role="group" aria-label="Hero slides">
@@ -153,17 +155,6 @@ ${financeBanner()}
   </div>
 </section>
 
-<section class="section" id="products" style="padding-bottom:0">
-  <div class="wrap center">
-    <span class="eyebrow">Products &amp; Brands</span>
-    <h2 class="h2" style="max-width:760px;margin:0 auto .5em;line-height:1.2">From the pool to the patio, we carry the brands that make your backyard the place everyone wants to be.</h2>
-    <p class="lead" style="max-width:640px;margin:14px auto 0">Names you can trust for years of quality, durability, and peace of mind. Ask us in-store about the full lineup we carry and install.</p>
-    <div style="margin-top:36px">
-      <a class="btn btn--navy" href="#divisions">Browse Our Divisions</a>
-    </div>
-  </div>
-</section>
-
 <section class="section" style="padding-bottom:0">
   <div class="photo-band">
 ${band}
@@ -184,15 +175,6 @@ ${band}
         <blockquote>${esc(site.tagline)}</blockquote>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap center">
-    <span class="eyebrow">Financing</span>
-    <h2 class="h2" style="max-width:640px;margin:0 auto .5em">Building the backyard you want shouldn&#39;t wait on the budget you have today.</h2>
-    <p class="lead" style="max-width:560px;margin:14px auto 26px">We&#39;ve partnered with VistaFi to offer financing for all credit profiles &mdash; check your rate without affecting your credit score.</p>
-    <a class="btn btn--navy" href="${esc(site.financeUrl)}" target="_blank" rel="noopener">Get Your Rate</a>
   </div>
 </section>
 
