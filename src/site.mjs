@@ -48,8 +48,12 @@ export const site = {
 export const FORM_ACCESS_KEY =
   process.env.WEB3FORMS_KEY || '51452120-20c2-4854-87aa-4efdba9379bc';
 
-// Canonical origin. Update once a real domain is attached in Cloudflare Pages.
-export const ORIGIN = process.env.SITE_ORIGIN || 'https://buck-nekkid.pages.dev';
+// Canonical origin — drives canonical tags, Open Graph URLs, and sitemap.xml.
+// Change this the day a real domain is attached, otherwise search engines keep
+// being told the workers.dev host is the canonical one. Overridable at build
+// time with SITE_ORIGIN. No trailing slash.
+export const ORIGIN =
+  process.env.SITE_ORIGIN || 'https://buck-nekkid.justinldecesare.workers.dev';
 
 // The seven product pages, in nav/footer order.
 export const products = [
