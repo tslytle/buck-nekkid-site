@@ -139,7 +139,7 @@ ${financeBanner()}
     <div class="two-up">
       <div>
         <span class="eyebrow">Visit Us</span>
-        <h2 class="h2">Come see it in person.</h2>
+        <h2 class="h2">Come see us in person.</h2>
         <div class="fact"><b>Address:</b> <span>${esc(site.addressLine)}</span></div>
         <div class="fact"><b>Phone:</b> <a href="${site.phoneHref}">${esc(site.phone)}</a></div>
         <div class="fact"><b>Hours:</b> <span>${esc(site.hoursShort)}</span></div>
