@@ -25,7 +25,7 @@ export function homePage() {
   const slides = heroSlides
     .map(
       (s, i) =>
-        `        <div class="hero__slide"><img src="/images/${s.src}" alt="${esc(s.alt)}" ${
+                `        <div class="hero__slide${i === 0 ? ' hero__slide--active' : ''}"><img src="/images/${s.src}" alt="${esc(s.alt)}" ${
           i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'
         }></div>`
     )
