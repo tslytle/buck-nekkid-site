@@ -38,19 +38,22 @@
 
   if (hero) {
     var track = hero.querySelector('[data-hero-track]');
-    var dots = Array.prototype.slice.call(hero.querySelectorAll('.hero__dot'));
-    var count = track ? track.children.length : 0;
-    var index = 0;
-    var timer = null;
-    var AUTOPLAY_MS = 3000;
+     var slides = track ? Array.prototype.slice.call(track.children) : [];
+     var dots = Array.prototype.slice.call(hero.querySelectorAll('.hero__dot'));
+     var count = slides.length;
+     var index = 0;
+     var timer = null;
+     var AUTOPLAY_MS = 3000;
 
-    var show = function (i) {
-      index = (i + count) % count;
-      track.style.transform = 'translateX(-' + index * 100 + '%)';
-      dots.forEach(function (d, di) {
-        d.setAttribute('aria-current', di === index ? 'true' : 'false');
-      });
-    };
+     var show = function (i) {
+        index = (i + count) % count;
+        slides.forEach(function (s, si) {
+           s.classList.toggle('hero__slide--active', si === index);
+        });
+        dots.forEach(function (d, di) {
+           d.setAttribute('aria-current', di === index ? 'true' : 'false');
+        });
+     };
 
     // Autoplay runs regardless of prefers-reduced-motion: the rotation is a
     // requirement of the page, not decoration. Reduced motion is honoured in
