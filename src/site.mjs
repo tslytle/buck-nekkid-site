@@ -23,17 +23,18 @@ export const site = {
     { days: ['Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' },
     { days: ['Saturday'], opens: '09:00', closes: '13:00' },
   ],
+  // logo: filename in public/images/brands/, or null to fall back to a text tile.
   brands: [
-    'Imagine Pools',
-    'Aspen Spas',
-    'Kamado Joe',
-    'Bull Grills',
-    'Durabull Outdoor Kitchens',
-    'Berlin Gardens',
-    'Polycraft Furniture',
-    'SimpliFire',
-    'Monessen',
-    'Regal Pool & Life Spa Chemicals',
+    { name: 'Imagine Pools', logo: 'imagine-pools.png' },
+    { name: 'Aspen Spas', logo: 'aspen-spas.png' },
+    { name: 'Kamado Joe', logo: 'kamado-joe.png' },
+    { name: 'Bull Grills', logo: 'bull-grills.png' },
+    { name: 'Durabull Outdoor Kitchens', logo: null },
+    { name: 'Berlin Gardens', logo: 'berlin-gardens.png' },
+    { name: 'Polycraft Furniture', logo: 'polycraft.png' },
+    { name: 'SimpliFire', logo: 'simplifire.png' },
+    { name: 'Monessen', logo: 'monessen.png' },
+    { name: 'Regal Pool & Life Spa Chemicals', logo: 'regal.png' },
   ],
 };
 

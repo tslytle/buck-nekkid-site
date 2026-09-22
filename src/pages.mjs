@@ -55,10 +55,16 @@ export function homePage() {
   // The marquee track is duplicated so translateX(-50%) loops seamlessly. The
   // second copy is decorative — hidden from AT, and from sight when the visitor
   // prefers reduced motion (no scroll means the repeat would just read twice).
-  const tile = (b, dupe) =>
-    `        <div class="marquee__tile${dupe ? ' marquee__tile--dupe' : ''}"${
+  const tile = (b, dupe) => {
+    const inner = b.logo
+      ? `<img src="/images/brands/${b.logo}" alt="${esc(b.name)}" loading="lazy" ${
+          dupe ? 'aria-hidden="true"' : ''
+        }>`
+      : `<span class="marquee__tile-text">${esc(b.name)}</span>`;
+    return `        <div class="marquee__tile${dupe ? ' marquee__tile--dupe' : ''}"${
       dupe ? ' aria-hidden="true"' : ''
-    }>${esc(b)}</div>`;
+    }>${inner}</div>`;
+  };
   const marquee = [
     ...site.brands.map((b) => tile(b, false)),
     ...site.brands.map((b) => tile(b, true)),

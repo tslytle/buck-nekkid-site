@@ -594,15 +594,26 @@ h2 {
   justify-content: center;
   height: 92px;
   min-width: 210px;
-  padding: 0 30px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 14px 28px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.06);
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.marquee__tile img {
+  max-height: 100%;
+  max-width: 170px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.marquee__tile-text {
   font-size: 16px;
   font-weight: 700;
   line-height: 1.15;
   text-align: center;
-  color: var(--on-dark);
+  color: var(--navy);
 }
 
 @keyframes bn-marquee {
